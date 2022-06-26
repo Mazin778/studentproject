@@ -18,7 +18,7 @@
     $dbname = "regstud";
     $conn = mysqli_connect($host, $user, $pass, $dbname);
     $show = mysqli_query($conn, 'SELECT * FROM students');
-    
+
     /*button variable*/
     $id = '';
     $name = '';
@@ -37,16 +37,14 @@
         $id = $_post['address'];
     }
     if (isset($_post['add'])) {
-        $ii = "insert into students value($id,'$name','$specialty','$address')";
+        $ii =" insert into student value ($id,'$name','specialty','$address')";
         mysqli_query($conn, $ii);
         header("Location:index.php");
-
     }
     if (isset($_post['del'])) {
-        $ii = "delete from students where name='$name'";
+        $sqls="delete from student where name='$name'";
         mysqli_query($conn, $ii);
         header("Location:index.php");
-
     }
     ?>
     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
@@ -59,16 +57,15 @@
                     <th>Specialty</th>
                     <th>Address</th>
                 </tr>
-
                 <?php
-                    while($row = mysqli_fetch_array($show)){
+                while ($row = mysqli_fetch_array($show)) {
                     echo "<tr>";
-                        echo "<td>".$row['id']."</td>";
-                        echo "<td>".$row['name']."</td>";
-                        echo "<td>".$row['specialty']."</td>";
-                        echo "<td>".$row['address']."</td>";
-                        echo "</tr>";
-                    }
+                    echo "<td>" . $row['id'] . "</td>";
+                    echo "<td>" . $row['name'] . "</td>";
+                    echo "<td>" . $row['specialty'] . "</td>";
+                    echo "<td>" . $row['address'] . "</td>";
+                    echo "</tr>";
+                }
                 ?>
             </table>
         </div>
@@ -106,12 +103,8 @@
                         <input type="text" id="address" name="address" placeholder="Enter Student Adress..">
                     </div>
                 </div>
-                <div class="addbutton">
-                    <input name="add" id="add" type="submit" value="Add">
-                </div>
-                <div class="delbutton">
-                    <input name="del" id="del" type="submit" value="Delete">
-                </div>
+                <button name="add">Add</button>
+                <button name="del"> Delete </button>
             </form>
         </div>
     </div>
